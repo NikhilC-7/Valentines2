@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictures</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+        }
+
+        /* Calm neon box */
+        #loveBox {
+            margin: 20px auto;
+            padding: 20px;
+            font-size: 22px;
+            color: white;
+            background-color: #00FFFF; /* Calm neon cyan color */
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            animation: pulseCyan 2s infinite alternate;
+        }
+
+        /* Pulsing effect for the calm neon box */
+        @keyframes pulseCyan {
+            0% {
+                box-shadow: 0 0 15px #00FFFF;
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 25px #00FFFF;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Gallery layout */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px; /* Adjusted height for uniformity */
+            border-radius: 15px;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .backBtn, .musicBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .backBtn:hover, .musicBtn:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="backgroundMusic" loop>
+        <source src="songs/Speechless.mp3" type="audio/mp3">
+    </audio>
+
+    <h1>Our Pictures</h1>
+
+    <!-- Calm neon box with the message -->
+    <div id="loveBox">
+        I love you so much and I can't wait to make more happy memories with you :) <3
+    </div>
+
+    <div class="gallery">
+        <img src="images/Us1.jpg" alt="Picture 1">
+        <img src="images/Us2.jpg" alt="Picture 2">
+        <img src="images/Us3.jpg" alt="Picture 3">
+        <img src="images/Us4.jpg" alt="Picture 4">
+        <img src="images/Us5.jpg" alt="Picture 5">
+        <img src="images/Us6.jpg" alt="Picture 6">
+        <img src="images/Us7.jpg" alt="Picture 7">
+    </div>
+
+    <button class="backBtn" onclick="window.location.href='Valentines.html'">Back</button>
+    <button class="musicBtn" onclick="playMusic()">Play Music</button>
+
+    <script>
+        const music = document.getElementById("backgroundMusic");
+
+        // Function to play music if allowed
+        function playMusic() {
+            music.play().catch(() => {
+                console.log("Autoplay blocked. Will play on user interaction.");
+            });
+        }
+
+        // Check if the music was playing before navigating
+        if (sessionStorage.getItem("musicPlaying") === "true") {
+            playMusic();
+        }
+
+        // Start music when user interacts (fixes autoplay restrictions)
+        document.addEventListener("click", () => {
+            if (music.paused) {
+                playMusic();
+                sessionStorage.setItem("musicPlaying", "true"); // Save state
+            }
+        });
+    </script>
+
+</body>
+</html>

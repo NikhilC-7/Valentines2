@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+        }
+
+        /* Pink sunset neon box */
+        #futureBox {
+            margin: 20px auto;
+            padding: 20px;
+            font-size: 22px;
+            color: white;
+            background-color: #ff1493; /* Bright pink color */
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            animation: pulsePink 2s infinite alternate;
+        }
+
+        /* Pulsing effect for the pink neon box */
+        @keyframes pulsePink {
+            0% {
+                box-shadow: 0 0 15px #ff1493;
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 25px #ff1493;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Gallery layout */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px auto;
+            max-width: 90%;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px; /* Adjusted height for uniformity */
+            border-radius: 15px;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .backBtn, .musicBtn {
+            margin: 20px 10px;
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .backBtn:hover, .musicBtn:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="backgroundMusic" loop>
+        <source src="songs/JanamJanam.mp3" type="audio/mp3">
+    </audio>
+
+    <h1>Our Future</h1>
+
+    <!-- Pink sunset neon box -->
+    <div id="futureBox">
+        I hope to create a future with reference to all of these images with you.
+    </div>
+
+    <!-- Gallery of images representing future -->
+    <div class="gallery">
+        <img src="images/beach villa.jpg" alt="Future 1">
+        <img src="images/desi wedding aesthetic.jpg" alt="Future 2">
+        <img src="images/gym.jpg" alt="Future 3">
+        <img src="images/desi wedding aesthetic.jpeg" alt="Future 4">
+        <img src="images/old money.jpeg" alt="Future 5">
+        <img src="images/travel.jpg" alt="Future 6">
+    </div>
+
+    <button class="backBtn" onclick="window.location.href='Valentines.html'">Back</button>
+    <button class="musicBtn" onclick="playMusic()">Play Music</button>
+
+    <script>
+        const music = document.getElementById("backgroundMusic");
+
+        // Function to play music if allowed
+        function playMusic() {
+            music.play().catch(() => {
+                console.log("Autoplay blocked. Will play on user interaction.");
+            });
+        }
+
+        // Check if the music was playing before navigating
+        if (sessionStorage.getItem("musicPlaying") === "true") {
+            playMusic();
+        }
+
+        // Start music when user interacts (fixes autoplay restrictions)
+        document.addEventListener("click", () => {
+            if (music.paused) {
+                playMusic();
+                sessionStorage.setItem("musicPlaying", "true"); // Save state
+            }
+        });
+    </script>
+
+</body>
+</html>

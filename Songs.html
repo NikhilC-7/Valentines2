@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Songs</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+        }
+        /* Romantic red pulsing text box */
+        #pulsingBox {
+            margin: 20px auto;
+            padding: 20px;
+            font-size: 20px;
+            color: white;
+            background-color: #e60000; /* Romantic deep red */
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            animation: pulse 2s infinite alternate;
+        }
+
+        /* Pulsing effect */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 15px #e60000;
+                transform: scale(1);
+            }
+            100% {
+                box-shadow: 0 0 25px #e60000;
+                transform: scale(1.05);
+            }
+        }
+
+        .playlist-container {
+            margin-top: 20px;
+        }
+        iframe {
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            height: 380px;
+        }
+        .backBtn, .musicBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .backBtn:hover, .musicBtn:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Our Songs</h1>
+
+    <!-- Background music controlled by button -->
+    <audio id="backgroundMusic">
+        <source src="songs/UB40.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Romantic red pulsing text box under the link and above the buttons -->
+    <div id="pulsingBox">
+        Here are a few songs that make me think about you :)
+    </div>
+    
+    <div class="playlist-container">
+        <iframe src="https://open.spotify.com/embed/playlist/49fABKzpq7ef2tbMCzYcgD?si=4e62aafaeb644e23&pt=15bd6611179a52593a981814df922a35" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+
+    <button class="backBtn" onclick="window.location.href='Valentines.html'">Back</button>
+    <button class="musicBtn" id="musicBtn">Play Music</button>
+
+    <script>
+        const music = document.getElementById("backgroundMusic");
+        const musicBtn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play().then(() => {
+                    musicBtn.textContent = "Pause Music";
+                }).catch(error => {
+                    console.log("Playback error:", error);
+                });
+            } else {
+                music.pause();
+                musicBtn.textContent = "Play Music";
+            }
+        }
+
+        // Event listener for button click
+        musicBtn.addEventListener("click", toggleMusic);
+    </script>
+
+</body>
+</html>

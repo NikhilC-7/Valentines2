@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+        }
+        #container {
+            margin-top: 100px;
+        }
+        #noBtn {
+            position: absolute;
+        }
+        .hidden {
+            display: none;
+        }
+        .option {
+            display: inline-block;
+            margin: 15px;
+        }
+        .option img {
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        #messageBox {
+            margin-top: 30px;
+            padding: 20px;
+            border: 3px solid neon;
+            border-radius: 10px;
+            background-color: #fff;
+            font-size: 18px;
+            color: #333;
+            width: 60%;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            animation: glow 1.5s infinite alternate;
+        }
+        /* Neon glow effect */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #ff007f, 0 0 30px #ff007f, 0 0 40px #ff007f, 0 0 50px #ff007f;
+            }
+            100% {
+                box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #ff007f, 0 0 50px #ff007f, 0 0 60px #ff007f, 0 0 70px #ff007f;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="backgroundMusic" loop>
+        <source src="songs/PennyLover.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="container">
+        <h1>Will you be my Valentine? ❤️</h1>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <div id="options" class="hidden">
+        <h2>Yay! 🎉 Now choose one:</h2>
+        <div class="option">
+            <img src="images/music note.jpeg" id="songs" alt="Songs">
+            <p>Songs</p>
+        </div>
+        <div class="option">
+            <img src="images/cover.jpg" id="pictures" alt="Pictures">
+            <p>Pictures</p>
+        </div>
+        <div class="option">
+            <img src="images/hands.jpg" id="future" alt="Future">
+            <p>Future</p>
+        </div>
+    </div>
+
+    <div id="messageBox" class="hidden">
+        <p>Dear Diyadhna, I wish you a very happy Valentines and I hope that I will get to spend it with you. Thank you for an amazing 2 years and for always putting up with my nonsense. You have been nothing but the best and the strongest person I have ever met, it has been an absolute honour to watch you grow as a young beautiful soul on this rock. I hope that one day you are able to see yourself the way I see you. I hope that one day you see all your flaws, imperfections, talents, smarts, kindness and your mesmerizing soul through my eyes. I love you Tigs <3</p>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+        const container = document.getElementById("container");
+        const options = document.getElementById("options");
+        const messageBox = document.getElementById("messageBox");
+        const songs = document.getElementById("songs");
+        const pictures = document.getElementById("pictures");
+        const future = document.getElementById("future");
+        const music = document.getElementById("backgroundMusic");
+
+        // Ensure music starts after any user interaction
+        document.addEventListener("click", () => {
+            if (music.paused) {
+                music.play();
+            }
+        }, { once: true }); // Runs only once on first interaction
+
+        noBtn.addEventListener("mouseover", () => {
+            const maxX = window.innerWidth - noBtn.clientWidth;
+            const maxY = window.innerHeight - noBtn.clientHeight;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        });
+
+        yesBtn.addEventListener("click", () => {
+            container.classList.add("hidden");
+            options.classList.remove("hidden");
+            messageBox.classList.remove("hidden");
+        });
+
+        songs.addEventListener("click", () => {
+            window.location.href = "Songs.html";
+        });
+
+        pictures.addEventListener("click", () => {
+            window.location.href = "pictures.html";
+        });
+
+        future.addEventListener("click", () => {
+            window.location.href = "future.html";
+        });
+    </script>
+
+</body>
+</html>
